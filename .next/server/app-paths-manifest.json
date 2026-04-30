@@ -1,0 +1,7 @@
+{
+  "/page": "app/page.js",
+  "/(public)/trip/[id]/page": "app/(public)/trip/[id]/page.js",
+  "/(public)/explore/page": "app/(public)/explore/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/(auth)/register/page": "app/(auth)/register/page.js"
+}
