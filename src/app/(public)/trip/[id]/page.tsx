@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Star, MapPin, Wifi, Coffee, Car, ShieldCheck, Waves, Dumbbell, ChevronRight, Heart, Share2, Check } from 'lucide-react';
+import { Star, MapPin, Wifi, Coffee, Car, ShieldCheck, Waves, Dumbbell, ChevronRight, Heart, Share2, Check, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 const hotel = {
@@ -201,7 +201,10 @@ export default function TripDetailsPage() {
 
             {/* Related */}
             <section>
-              <h2 className="text-2xl font-black text-[#051036] mb-6">Similar Hotels</h2>
+              <div className="flex items-center gap-2 mb-6">
+                <Sparkles className="w-6 h-6 text-[#3554D1]" />
+                <h2 className="text-2xl font-black text-[#051036]">AI Recommended Similar Hotels</h2>
+              </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {related.map(r => (
                   <Link key={r.id} href={`/trip/${r.id}`} className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all">
@@ -258,7 +261,12 @@ export default function TripDetailsPage() {
               <button className="w-full bg-[#3554D1] text-white py-4 rounded-xl font-black hover:bg-[#2a43b0] transition-all shadow-lg shadow-blue-500/20 text-base">
                 Reserve Now
               </button>
-              <p className="text-center text-xs text-gray-400">You won't be charged yet</p>
+              
+              <Link href="/ai-planner" className="w-full mt-3 bg-blue-50 text-[#3554D1] py-3.5 rounded-xl font-bold border border-blue-100 hover:bg-blue-100 transition-all flex items-center justify-center gap-2 text-sm">
+                <Sparkles className="w-4 h-4" /> AI Trip Planner
+              </Link>
+
+              <p className="text-center text-xs text-gray-400 mt-2">You won't be charged yet</p>
 
               <div className="space-y-3 pt-4 border-t border-gray-100">
                 {[['BDT 6,000 × 2 nights', 'BDT 12,000'], ['Discount (10%)', '-BDT 1,200'], ['Service fee', 'BDT 800']].map(([l, v]) => (

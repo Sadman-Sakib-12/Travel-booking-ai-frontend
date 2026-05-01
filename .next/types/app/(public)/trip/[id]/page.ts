@@ -1,4 +1,4 @@
-// File: D:\Travel-booking-ai\src\app\(public)\trip\[id]\page.tsx
+// File: D:\Travel-booking-ai-frontend\src\app\(public)\trip\[id]\page.tsx
 import * as entry from '../../../../../../src/app/(public)/trip/[id]/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

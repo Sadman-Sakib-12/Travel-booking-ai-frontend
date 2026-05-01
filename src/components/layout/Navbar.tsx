@@ -36,13 +36,16 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hotelsOpen, setHotelsOpen] = useState(false);
   const [destOpen, setDestOpen] = useState(false);
+  const [aiOpen, setAiOpen] = useState(false);
   const hotelsRef = useRef<HTMLDivElement>(null);
   const destRef = useRef<HTMLDivElement>(null);
+  const aiRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (hotelsRef.current && !hotelsRef.current.contains(e.target as Node)) setHotelsOpen(false);
       if (destRef.current && !destRef.current.contains(e.target as Node)) setDestOpen(false);
+      if (aiRef.current && !aiRef.current.contains(e.target as Node)) setAiOpen(false);
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
@@ -68,7 +71,7 @@ export default function Navbar() {
           {/* Hotels Dropdown */}
           <div ref={hotelsRef} className="relative">
             <button
-              onClick={() => { setHotelsOpen(!hotelsOpen); setDestOpen(false); }}
+              onClick={() => { setHotelsOpen(!hotelsOpen); setDestOpen(false); setAiOpen(false); }}
               className="flex items-center gap-1 text-[#051036] font-medium text-sm hover:text-[#3554D1] transition-colors"
             >
               Hotels <ChevronDown className={`w-4 h-4 transition-transform ${hotelsOpen ? 'rotate-180' : ''}`} />
@@ -126,7 +129,7 @@ export default function Navbar() {
           {/* Destinations Dropdown */}
           <div ref={destRef} className="relative">
             <button
-              onClick={() => { setDestOpen(!destOpen); setHotelsOpen(false); }}
+              onClick={() => { setDestOpen(!destOpen); setHotelsOpen(false); setAiOpen(false); }}
               className="flex items-center gap-1 text-[#051036] font-medium text-sm hover:text-[#3554D1] transition-colors"
             >
               Destinations <ChevronDown className={`w-4 h-4 transition-transform ${destOpen ? 'rotate-180' : ''}`} />
@@ -142,6 +145,10 @@ export default function Navbar() {
             )}
           </div>
 
+          <Link href="/ai-planner" className="flex items-center gap-1.5 text-[#3554D1] font-bold text-sm bg-[#3554D1]/10 px-3 py-1.5 rounded-full hover:bg-[#3554D1]/20 transition-colors">
+            <span className="w-1.5 h-1.5 bg-[#3554D1] rounded-full animate-pulse"></span> Plan with AI
+          </Link>
+          
           <Link href="/contact" className="text-[#051036] font-medium text-sm hover:text-[#3554D1] transition-colors">Contact</Link>
           </div>
         </div>

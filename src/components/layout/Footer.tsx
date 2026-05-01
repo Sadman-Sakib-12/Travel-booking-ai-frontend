@@ -31,11 +31,11 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100 pt-16 pb-8">
       <div className="max-w-[1320px] mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
           {/* Brand Info */}
-          <div className="space-y-5 lg:pr-10">
+          <div className="space-y-5 lg:col-span-2 lg:pr-10">
             <Link href="/" className="inline-block">
-              <span className="text-2xl font-black"><span className="text-[#3554D1]">trip</span><span className="text-[#051036]">booking</span><span className="text-gray-500">.ai</span></span>
+              <span className="text-2xl font-black tracking-tight text-[#3554D1]">tripbooking.ai</span>
             </Link>
             <p className="text-gray-500 text-sm">
               Plan. Compare. Book with AI
@@ -79,9 +79,9 @@ export default function Footer() {
         {/* Payment Gateways */}
         <div className="mb-8">
           <img 
-            src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-05.png" 
+            src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-03.png" 
             alt="Payment Methods" 
-            className="w-full max-w-4xl mx-auto h-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+            className="w-full h-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
           />
         </div>

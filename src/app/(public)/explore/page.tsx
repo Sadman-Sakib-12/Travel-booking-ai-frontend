@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Search, MapPin, Star, SlidersHorizontal, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Search, MapPin, Star, SlidersHorizontal, ChevronLeft, ChevronRight, X, Heart, ArrowUpRight, BadgeCheck, BedDouble, Activity, Waves, Dumbbell, Bath, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 const allHotels = [
@@ -50,7 +50,13 @@ export default function ExplorePage() {
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const paginated = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
-  const resetFilters = () => { setCategory('All'); setMaxPrice(10000); setMinRating(0); setSearch(''); setPage(1); };
+  const resetFilters = () => {
+    setCategory('All');
+    setMaxPrice(10000);
+    setMinRating(0);
+    setSearch('');
+    setPage(1);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
@@ -62,21 +68,23 @@ export default function ExplorePage() {
               <h1 className="text-3xl md:text-5xl font-black text-white">Explore Hotels</h1>
               <p className="text-white/60 mt-2">Find and book the perfect hotel for your next trip</p>
             </div>
-            {/* Search Bar */}
-            <div className="max-w-2xl bg-white rounded-2xl p-2 flex gap-2 shadow-2xl">
+            {/* AI Smart Search */}
+            <div className="max-w-3xl bg-white rounded-2xl p-2 flex gap-2 shadow-2xl border-2 border-transparent focus-within:border-blue-200 transition-colors">
               <div className="flex-1 flex items-center gap-3 px-4">
-                <Search className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                <div className="w-8 h-8 rounded-full bg-[#3554D1]/10 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-4 h-4 text-[#3554D1]" />
+                </div>
                 <input
                   type="text"
                   value={search}
                   onChange={e => { setSearch(e.target.value); setPage(1); }}
-                  placeholder="Search hotels, destinations..."
-                  className="w-full bg-transparent border-none outline-none text-[#051036] text-sm font-medium placeholder:text-gray-400"
+                  placeholder="Ask AI: e.g. 'Beach resorts under 5k BDT with pool'"
+                  className="w-full bg-transparent border-none outline-none text-[#051036] text-[15px] font-medium placeholder:text-gray-400"
                 />
                 {search && <button onClick={() => setSearch('')}><X className="w-4 h-4 text-gray-400" /></button>}
               </div>
-              <button className="bg-[#3554D1] text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#2a43b0] transition-all">
-                Search
+              <button className="bg-[#051036] text-white px-8 py-3.5 rounded-xl font-bold text-sm hover:bg-[#112975] transition-all flex items-center gap-2 flex-shrink-0">
+                <Sparkles className="w-4 h-4" /> Smart Search
               </button>
             </div>
           </motion.div>
@@ -87,133 +95,215 @@ export default function ExplorePage() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <aside className={`lg:w-72 flex-shrink-0 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-7 sticky top-24">
-              <div className="flex items-center justify-between">
-                <h3 className="font-black text-[#051036] flex items-center gap-2">
-                  <SlidersHorizontal className="w-5 h-5 text-[#3554D1]" /> Filters
-                </h3>
-                <button onClick={resetFilters} className="text-xs text-[#3554D1] font-bold hover:underline">Reset All</button>
+            <div className="space-y-6">
+              {/* Map Preview */}
+              <div className="bg-blue-50/50 rounded-xl p-2 relative overflow-hidden h-[160px] flex items-center justify-center border border-gray-200">
+                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%233554D1\' fill-opacity=\'0.4\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E")', backgroundSize: '20px 20px' }}></div>
+                <button className="relative z-10 bg-white border border-[#3554D1] text-[#3554D1] font-bold text-sm px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm hover:bg-blue-50 transition-colors">
+                  <MapPin className="w-4 h-4" /> Show on map
+                </button>
               </div>
 
-              {/* Category */}
-              <div className="space-y-3">
-                <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest">Destination</h4>
-                {categories.map(cat => (
-                  <label key={cat} className="flex items-center gap-3 cursor-pointer group">
-                    <input
-                      type="radio"
-                      name="category"
-                      checked={category === cat}
-                      onChange={() => { setCategory(cat); setPage(1); }}
-                      className="w-4 h-4 accent-[#3554D1]"
-                    />
-                    <span className={`text-sm font-medium transition-colors ${category === cat ? 'text-[#3554D1] font-bold' : 'text-gray-600 group-hover:text-[#3554D1]'}`}>{cat}</span>
-                  </label>
-                ))}
+              {/* Search */}
+              <div>
+                <h4 className="text-[15px] font-bold text-[#051036] mb-3">Search by property name</h4>
+                <div className="relative">
+                  <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input type="text" placeholder="Search hotel name" className="w-full border border-gray-200 rounded-lg pl-9 pr-4 py-2.5 text-sm outline-none focus:border-[#3554D1] text-[#051036]" />
+                </div>
               </div>
+
+              <div className="w-full h-px bg-gray-200"></div>
 
               {/* Price Range */}
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest">Max Price</h4>
-                  <span className="text-xs font-bold text-[#3554D1]">BDT {maxPrice.toLocaleString()}</span>
-                </div>
-                <input
-                  type="range"
-                  min="1000"
-                  max="10000"
-                  step="500"
-                  value={maxPrice}
-                  onChange={e => { setMaxPrice(Number(e.target.value)); setPage(1); }}
-                  className="w-full accent-[#3554D1]"
-                />
-                <div className="flex justify-between text-xs text-gray-400 font-medium">
-                  <span>BDT 1,000</span>
-                  <span>BDT 10,000</span>
+              <div>
+                <h4 className="text-[15px] font-bold text-[#051036] mb-4">Price Range</h4>
+                <p className="text-sm font-medium text-gray-500 mb-4">BDT 0 - BDT {maxPrice.toLocaleString()}</p>
+                <div className="relative px-2">
+                  <input
+                    type="range"
+                    min="1000"
+                    max="40000"
+                    step="1000"
+                    value={maxPrice}
+                    onChange={e => { setMaxPrice(Number(e.target.value)); setPage(1); }}
+                    className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#3554D1]"
+                  />
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-[3px] border-[#3554D1] rounded-full pointer-events-none"></div>
+                  <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-[3px] border-[#3554D1] rounded-full pointer-events-none" style={{ left: `calc(${(maxPrice - 1000) / 39000 * 100}% - 6px)` }}></div>
                 </div>
               </div>
 
-              {/* Min Rating */}
-              <div className="space-y-3">
-                <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest">Min Rating</h4>
-                <div className="flex gap-2 flex-wrap">
-                  {[0, 4, 4.5, 4.8].map(r => (
+              <div className="w-full h-px bg-gray-200"></div>
+
+              {/* Star Rating */}
+              <div>
+                <h4 className="text-[15px] font-bold text-[#051036] mb-4">Star Rating</h4>
+                <div className="grid grid-cols-3 gap-2">
+                  {[1, 2, 3, 4, 5].map(r => (
                     <button
                       key={r}
                       onClick={() => { setMinRating(r); setPage(1); }}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${minRating === r ? 'bg-[#3554D1] text-white border-[#3554D1]' : 'border-gray-200 text-gray-600 hover:border-[#3554D1]'}`}
+                      className={`px-2 py-2 rounded-lg text-xs font-bold border transition-all ${minRating === r ? 'bg-[#3554D1]/5 border-[#3554D1] text-[#3554D1]' : 'border-gray-200 text-gray-500 hover:border-[#3554D1] hover:text-[#3554D1]'}`}
                     >
-                      {r === 0 ? 'All' : `${r}+`}
+                      {r} Star{r > 1 && 's'}
                     </button>
                   ))}
                 </div>
               </div>
+
+              <div className="w-full h-px bg-gray-200"></div>
+
+              {/* Checkbox Lists */}
+              {[
+                { title: 'Accommodation Type', items: ['Hotel', 'Resort'] },
+                { title: 'Facilities', items: ['Breakfast', 'Non-smoking', 'WiFi', 'Parking', 'Swimming Pool', 'Room Service', 'Airport Shuttle', 'Air Conditioning'] },
+                { title: 'Amenities', items: ['Air conditioning', 'Balcony', 'Bathtub', 'Hill View', 'Non-Smoking Room', 'Smoking Room', 'Tea and Coffee', 'TV', 'Wi-Fi', 'Sea View'] },
+                { title: 'Neighborhood', items: ['Kolatoli', 'Hotel Motel Zone', 'Inani', 'Sugandha', 'Laboni', 'Marine Drive'] }
+              ].map((section, sidx) => (
+                <div key={sidx} className="space-y-4">
+                  <h4 className="text-[15px] font-bold text-[#051036]">{section.title}</h4>
+                  <div className="space-y-3">
+                    {section.items.map(item => (
+                      <label key={item} className="flex items-start gap-3 cursor-pointer group">
+                        <div className="relative flex items-center justify-center w-4 h-4 mt-0.5">
+                          <input type="checkbox" className="w-4 h-4 border-2 border-gray-300 rounded-sm appearance-none checked:bg-[#3554D1] checked:border-[#3554D1] transition-colors peer cursor-pointer" />
+                          <svg className="absolute w-3 h-3 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.6666 3.5L5.24992 9.91667L2.33325 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                        <span className="text-[13px] font-medium text-[#051036] leading-tight group-hover:text-[#3554D1] transition-colors">{item}</span>
+                      </label>
+                    ))}
+                  </div>
+                  {sidx < 3 && <div className="w-full h-px bg-gray-200 mt-6"></div>}
+                </div>
+              ))}
             </div>
           </aside>
 
-          {/* Main */}
-          <main className="flex-1 space-y-6">
-            {/* Toolbar */}
-            <div className="flex items-center justify-between bg-white px-5 py-3.5 rounded-2xl border border-gray-100 shadow-sm">
-              <div className="flex items-center gap-3">
-                <button onClick={() => setShowFilters(!showFilters)} className="lg:hidden flex items-center gap-2 text-sm font-bold text-[#051036] border border-gray-200 px-3 py-2 rounded-lg">
-                  <SlidersHorizontal className="w-4 h-4" /> Filters
-                </button>
-                <span className="text-gray-500 text-sm">
-                  <span className="font-bold text-[#051036]">{filtered.length}</span> hotels found
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-400 hidden sm:block">Sort:</span>
-                <select
-                  value={sort}
-                  onChange={e => { setSort(e.target.value); setPage(1); }}
-                  className="border border-gray-200 rounded-lg px-3 py-2 text-sm font-bold text-[#051036] outline-none focus:border-[#3554D1]"
-                >
-                  {sortOptions.map(o => <option key={o}>{o}</option>)}
-                </select>
+          {/* Main Content */}
+          <div className="flex-1 min-w-0">
+            {/* AI Recommendation Banner */}
+            <div className="bg-gradient-to-r from-blue-50/80 to-indigo-50/80 border border-blue-100/50 rounded-2xl p-5 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+               <div>
+                  <h3 className="font-black text-[#051036] flex items-center gap-2 text-lg"><Sparkles className="w-5 h-5 text-[#3554D1]"/> AI Top Picks for You</h3>
+                  <p className="text-gray-600 text-sm mt-1">Based on your recent searches for beach resorts.</p>
+               </div>
+               <button className="text-sm font-bold text-[#3554D1] bg-white px-5 py-2.5 rounded-xl border border-blue-100 hover:bg-blue-50 transition-colors shadow-sm whitespace-nowrap">
+                  View Recommendations
+               </button>
+            </div>
+
+            {/* Top Bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <button onClick={() => setShowFilters(!showFilters)} className="lg:hidden flex items-center gap-2 text-sm font-bold text-[#051036] border border-gray-200 px-3 py-2 rounded-lg">
+                <SlidersHorizontal className="w-4 h-4" /> Filters
+              </button>
+              <div className="hidden lg:block"></div>
+              <div className="flex items-center">
+                <div className="relative">
+                  <select
+                    value={sort}
+                    onChange={e => { setSort(e.target.value); setPage(1); }}
+                    className="appearance-none bg-white border border-[#3554D1] rounded-full px-5 py-2.5 pr-10 text-sm font-bold text-[#3554D1] outline-none hover:bg-blue-50 cursor-pointer transition-colors shadow-sm"
+                  >
+                    <option>Sort by Popularity</option>
+                    {sortOptions.map(o => <option key={o} value={o}>{o}</option>)}
+                  </select>
+                  <Search className="w-4 h-4 text-[#3554D1] absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
               </div>
             </div>
 
-            {/* Grid */}
+            {/* List */}
             {paginated.length === 0 ? (
-              <div className="bg-white rounded-2xl p-16 text-center">
+              <div className="bg-white rounded-2xl p-16 text-center border border-gray-200">
                 <p className="text-gray-400 font-medium">No hotels found. Try adjusting your filters.</p>
                 <button onClick={resetFilters} className="mt-4 text-[#3554D1] font-bold text-sm hover:underline">Reset Filters</button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+              <div className="flex flex-col gap-4">
                 {paginated.map((hotel, idx) => (
                   <motion.div
                     key={hotel.id}
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.06 }}
-                    className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 flex flex-col h-full group"
+                    className="bg-white rounded-[16px] overflow-hidden border border-gray-200 flex flex-col md:flex-row hover:shadow-lg transition-shadow duration-300 group"
                   >
-                    <div className="relative h-[180px] overflow-hidden">
-                      <img src={hotel.image} alt={hotel.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1">
-                        <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                        <span className="text-xs font-bold text-[#051036]">{hotel.rating}</span>
+                    {/* Image Section */}
+                    <div className="relative w-full md:w-[280px] h-[220px] md:h-auto flex-shrink-0 p-3">
+                      <div className="relative w-full h-full rounded-xl overflow-hidden bg-gray-100">
+                        <img src={hotel.image} alt={hotel.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <button className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-gray-50 transition-colors z-10">
+                          <Heart className="w-3.5 h-3.5 text-gray-400 hover:text-red-500 transition-colors" />
+                        </button>
                       </div>
                     </div>
-                    <div className="p-4 flex flex-col flex-1">
-                      <div className="flex items-center gap-1 text-gray-400 text-xs mb-1.5">
-                        <MapPin className="w-3 h-3" /> {hotel.location}
-                      </div>
-                      <h3 className="font-bold text-[#051036] text-sm mb-1 line-clamp-2 group-hover:text-[#3554D1] transition-colors">{hotel.name}</h3>
-                      <div className="flex items-center gap-0.5 mb-3">
-                        {[...Array(hotel.stars)].map((_, i) => <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />)}
-                      </div>
-                      <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between">
-                        <div>
-                          <span className="text-[10px] text-gray-400">From</span>
-                          <p className="text-[#3554D1] font-black text-sm">BDT {hotel.price.toLocaleString()}<span className="text-[10px] font-normal text-gray-400">/night</span></p>
+
+                    {/* Content Section */}
+                    <div className="flex-1 p-4 md:p-5 md:pl-2 flex flex-col justify-between">
+                      <div className="flex flex-col md:flex-row justify-between gap-4 h-full">
+                        <div className="flex-1 flex flex-col">
+                          <div className="flex items-center gap-2 flex-wrap mb-1">
+                            <h3 className="text-[20px] font-bold text-[#051036] leading-tight hover:text-[#3554D1] transition-colors cursor-pointer">{hotel.name}</h3>
+                            <div className="flex items-center gap-0.5">
+                              {[...Array(hotel.stars)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
+                            </div>
+                          </div>
+                          
+                          <p className="text-[13px] text-gray-500 flex items-center gap-1.5 flex-wrap mb-4">
+                            28-29, Hotel Motel Zone, Kolatoli, Cox's Bazar <span className="text-gray-400 font-bold">•</span> <button className="text-[#3554D1] hover:underline">Show on map</button>
+                          </p>
+
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#3554D1] text-[#3554D1] text-[13px] font-medium mb-4 w-fit">
+                            <BadgeCheck className="w-4 h-4" fill="#3554D1" stroke="white" /> Official Partner
+                          </div>
+
+                          <div className="mt-auto">
+                            <p className="text-[14px] text-[#051036] flex items-center gap-1 mb-1">
+                              Deluxe King Without Balcony <span className="text-gray-400 font-bold mx-1">•</span> 1x <BedDouble className="w-4 h-4 text-[#3554D1]" />
+                            </p>
+                            <p className="text-[14px] font-medium text-[#008768] mb-4">Only {(hotel.reviews % 5) + 1} rooms left at this price</p>
+                            
+                            <div className="inline-flex items-center gap-4 bg-gray-100/80 rounded-full px-4 py-1.5 text-[13px] text-gray-600 font-medium flex-wrap">
+                              <span className="flex items-center gap-1.5"><Activity className="w-4 h-4 text-[#3554D1]" /> Spa</span>
+                              <span className="flex items-center gap-1.5"><Waves className="w-4 h-4 text-[#3554D1]" /> Pool</span>
+                              <span className="flex items-center gap-1.5"><Dumbbell className="w-4 h-4 text-[#3554D1]" /> Gym</span>
+                              <span className="flex items-center gap-1.5"><Bath className="w-4 h-4 text-[#3554D1]" /> Bathtub</span>
+                            </div>
+                          </div>
                         </div>
-                        <Link href={`/trip/${hotel.id}`} className="bg-[#3554D1] text-white text-xs font-bold px-3 py-2 rounded-lg hover:bg-[#2a43b0] transition-all">
-                          View
-                        </Link>
+
+                        {/* Right side details */}
+                        <div className="flex flex-col items-end text-right min-w-[160px] justify-between">
+                          <div className="flex items-center gap-2 mb-4">
+                            <span className="font-medium text-[#051036] text-[13px]">Exceptional</span>
+                            <div className="bg-[#1a3b99] text-white font-bold text-[13px] px-2 py-1 rounded-[4px]">
+                              {hotel.rating.toFixed(1)}
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col items-end">
+                            <div className="bg-[#fef4e3] text-[#b8761a] font-medium text-[13px] px-2 py-0.5 rounded-[4px] mb-1.5">
+                              Save 51%
+                            </div>
+                            <p className="text-[13px] text-gray-500 mb-0.5">
+                              Starts from <span className="line-through">BDT {(hotel.price * 2).toLocaleString()}</span>
+                            </p>
+                            <p className="text-[26px] font-bold text-[#051036] leading-none mb-1 tracking-tight">
+                              BDT {hotel.price.toLocaleString()}
+                            </p>
+                            <p className="text-[12px] text-gray-500 mb-4">
+                              for 1 night, per room
+                            </p>
+                            
+                            <Link href={`/trip/${hotel.id}`} className="bg-[#1a3b99] text-white font-medium text-[14px] px-6 py-2.5 rounded-lg flex items-center gap-1.5 hover:bg-[#112975] transition-colors w-full justify-center">
+                              See availability <ArrowUpRight className="w-4 h-4" />
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
@@ -223,7 +313,7 @@ export default function ExplorePage() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2 pt-4">
+              <div className="flex items-center justify-center gap-2 pt-8">
                 <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="w-9 h-9 rounded-lg border border-gray-200 flex items-center justify-center hover:border-[#3554D1] hover:text-[#3554D1] disabled:opacity-40 transition-all">
                   <ChevronLeft className="w-4 h-4" />
                 </button>
@@ -237,7 +327,7 @@ export default function ExplorePage() {
                 </button>
               </div>
             )}
-          </main>
+          </div>
         </div>
       </div>
     </div>
