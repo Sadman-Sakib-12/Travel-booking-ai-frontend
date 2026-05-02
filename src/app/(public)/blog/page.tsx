@@ -20,14 +20,14 @@ export default function BlogPage() {
     <div className="min-h-screen bg-white pt-16">
       {/* Header */}
       <div className="bg-[#051036] py-16">
-        <div className="max-w-[1320px] mx-auto px-4 text-center">
+        <div className="max-w-[1440px] mx-auto px-4 text-center">
           <p className="text-[#3554D1] font-bold text-sm uppercase tracking-widest mb-3">Our Blog</p>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">Travel Stories & Tips</h1>
           <p className="text-white/60 text-lg max-w-xl mx-auto">Discover travel guides, hotel reviews, and insider tips from our team of travel experts.</p>
         </div>
       </div>
 
-      <div className="max-w-[1320px] mx-auto px-4 py-16 space-y-16">
+      <div className="max-w-[1440px] mx-auto px-4 py-16 space-y-16">
         {/* Categories */}
         <div className="flex flex-wrap gap-3">
           {categories.map(cat => (

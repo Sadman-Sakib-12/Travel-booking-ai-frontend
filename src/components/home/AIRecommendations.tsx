@@ -34,7 +34,7 @@ const recommendations = [
 export default function AIRecommendations() {
   return (
     <section className="py-20 bg-gradient-to-b from-white to-blue-50/30">
-      <div className="max-w-[1320px] mx-auto px-4">
+      <div className="max-w-[1440px] mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <div className="inline-flex items-center gap-2 text-[#3554D1] font-bold text-sm bg-[#3554D1]/10 px-3 py-1.5 rounded-full mb-3">

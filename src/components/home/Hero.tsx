@@ -35,7 +35,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[#051036]/40" />
       </div>
 
-      <div className="max-w-[1320px] mx-auto px-4 relative z-10 text-center text-white w-full py-16">
+      <div className="max-w-[1440px] mx-auto px-4 relative z-10 text-center text-white w-full py-16">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}

@@ -1,6 +1,6 @@
 {
-  "/(public)/explore/page": "app/(public)/explore/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
-  "/(public)/ai-planner/page": "app/(public)/ai-planner/page.js",
-  "/(public)/trip/[id]/page": "app/(public)/trip/[id]/page.js"
+  "/(public)/trip/[id]/page": "app/(public)/trip/[id]/page.js",
+  "/(public)/explore/page": "app/(public)/explore/page.js"
 }

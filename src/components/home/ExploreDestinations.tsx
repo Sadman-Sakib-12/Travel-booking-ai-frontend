@@ -29,7 +29,7 @@ const destinations = [
 export default function ExploreDestinations() {
   return (
     <section className="py-16 bg-white">
-      <div className="max-w-[1320px] mx-auto px-4">
+      <div className="max-w-[1440px] mx-auto px-4">
         <div className="mb-8">
           <h2 className="text-2xl md:text-[28px] font-bold text-[#051036]">Explore Bangladesh</h2>
           <p className="text-gray-500 mt-2 text-sm font-medium">Discover stunning destinations across Bangladesh</p>

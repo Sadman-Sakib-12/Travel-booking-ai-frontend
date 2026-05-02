@@ -62,7 +62,7 @@ export default function ExplorePage() {
     <div className="min-h-screen bg-gray-50 pt-16">
       {/* Header */}
       <div className="bg-[#051036] py-14">
-        <div className="max-w-[1320px] mx-auto px-4">
+        <div className="max-w-[1440px] mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
             <div>
               <h1 className="text-3xl md:text-5xl font-black text-white">Explore Hotels</h1>
@@ -91,7 +91,7 @@ export default function ExplorePage() {
         </div>
       </div>
 
-      <div className="max-w-[1320px] mx-auto px-4 py-10">
+      <div className="max-w-[1440px] mx-auto px-4 py-10">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <aside className={`lg:w-72 flex-shrink-0 ${showFilters ? 'block' : 'hidden lg:block'}`}>

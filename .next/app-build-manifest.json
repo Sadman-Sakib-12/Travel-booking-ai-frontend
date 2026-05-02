@@ -11,6 +11,11 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
+    "/(public)/trip/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(public)/trip/[id]/page.js"
+    ],
     "/(public)/explore/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -21,10 +26,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(public)/ai-planner/page.js"
     ],
-    "/(public)/trip/[id]/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(public)/trip/[id]/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

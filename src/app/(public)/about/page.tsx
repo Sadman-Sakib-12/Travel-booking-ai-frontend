@@ -21,7 +21,7 @@ export default function AboutPage() {
       {/* Hero */}
       <div className="bg-[#051036] py-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#3554D1]/10 rounded-full translate-x-1/2 -translate-y-1/2" />
-        <div className="max-w-[1320px] mx-auto px-4 relative z-10 text-center">
+        <div className="max-w-[1440px] mx-auto px-4 relative z-10 text-center">
           <p className="text-[#3554D1] font-bold text-sm uppercase tracking-widest mb-4">About Us</p>
           <h1 className="text-4xl md:text-6xl font-black text-white mb-6">We Make Travel <br /><span className="text-[#3554D1]">Effortless</span></h1>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
@@ -32,7 +32,7 @@ export default function AboutPage() {
 
       {/* Stats */}
       <div className="bg-[#3554D1] py-14">
-        <div className="max-w-[1320px] mx-auto px-4">
+        <div className="max-w-[1440px] mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map(({ value, label, icon: Icon }) => (
               <div key={label} className="text-center text-white">
@@ -47,7 +47,7 @@ export default function AboutPage() {
 
       {/* Story */}
       <div className="py-20">
-        <div className="max-w-[1320px] mx-auto px-4">
+        <div className="max-w-[1440px] mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <p className="text-[#3554D1] font-bold text-sm uppercase tracking-widest">Our Story</p>
@@ -82,7 +82,7 @@ export default function AboutPage() {
 
       {/* Team */}
       <div className="py-20 bg-gray-50">
-        <div className="max-w-[1320px] mx-auto px-4">
+        <div className="max-w-[1440px] mx-auto px-4">
           <div className="text-center mb-14">
             <p className="text-[#3554D1] font-bold text-sm uppercase tracking-widest mb-3">Our Team</p>
             <h2 className="text-3xl md:text-4xl font-black text-[#051036]">Meet the People Behind TripBooking</h2>
@@ -101,7 +101,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <div className="py-20 bg-[#3554D1]">
-        <div className="max-w-[1320px] mx-auto px-4 text-center space-y-6">
+        <div className="max-w-[1440px] mx-auto px-4 text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-black text-white">Ready to Start Your Journey?</h2>
           <p className="text-white/75 text-lg max-w-xl mx-auto">Join over 150,000 travelers who trust TripBooking AI for their travel needs.</p>
           <div className="flex items-center justify-center gap-4 flex-wrap">

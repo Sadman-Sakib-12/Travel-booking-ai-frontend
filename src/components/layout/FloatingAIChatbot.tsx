@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Bot, User, Sparkles } from 'lucide-react';
+import { X, Send, Bot, User, Sparkles, Zap } from 'lucide-react';
 
 type Message = {
   id: string;
@@ -64,12 +64,12 @@ export default function FloatingAIChatbot() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 w-14 h-14 bg-[#3554D1] text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-[#2a43b0] transition-transform hover:scale-110 z-50 ${isOpen ? 'hidden' : 'flex'}`}
+        className={`fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-br from-cyan-400 to-cyan-600 text-white rounded-full flex items-center justify-center shadow-[0_20px_60px_-12px_rgba(56,189,248,0.6)] hover:shadow-[0_25px_80px_-15px_rgba(56,189,248,0.8)] transition-all hover:scale-110 z-50 ${isOpen ? 'hidden' : 'flex'} border border-cyan-300/30`}
       >
-        <MessageSquare className="w-6 h-6" />
+        <Sparkles className="w-7 h-7" />
         <span className="absolute -top-1 -right-1 flex h-4 w-4">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-4 w-4 bg-amber-500"></span>
         </span>
       </button>
 
@@ -81,17 +81,20 @@ export default function FloatingAIChatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-6 w-[350px] sm:w-[400px] h-[550px] max-h-[85vh] bg-white rounded-2xl shadow-2xl z-50 flex flex-col border border-gray-200 overflow-hidden"
+            className="fixed bottom-6 right-6 w-[350px] sm:w-[400px] h-[550px] max-h-[85vh] bg-slate-900/95 rounded-3xl shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] z-50 flex flex-col border border-white/10 overflow-hidden backdrop-blur-xl"
           >
             {/* Header */}
-            <div className="bg-[#3554D1] p-4 flex justify-between items-center text-white">
+            <div className="bg-gradient-to-r from-cyan-500 to-cyan-600 p-4 flex justify-between items-center text-white">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                  <Sparkles className="w-5 h-5" />
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                  <Zap className="w-6 h-6" />
                 </div>
                 <div>
                   <h3 className="font-bold text-sm">TripBooking AI Assistant</h3>
-                  <p className="text-[11px] text-white/80">Online & ready to help</p>
+                  <p className="text-[11px] text-white/80 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                    Online & ready to help
+                  </p>
                 </div>
               </div>
               <button onClick={() => setIsOpen(false)} className="text-white/80 hover:text-white transition-colors">
@@ -100,14 +103,14 @@ export default function FloatingAIChatbot() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 bg-gray-50/50 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 bg-slate-950/50 space-y-4">
               {messages.map((msg) => (
                 <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`flex gap-2 max-w-[85%] ${msg.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${msg.sender === 'user' ? 'bg-[#051036] text-white' : 'bg-[#3554D1]/10 text-[#3554D1]'}`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${msg.sender === 'user' ? 'bg-cyan-500 text-white' : 'bg-slate-800/80 text-cyan-300 border border-cyan-400/30'}`}>
                       {msg.sender === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
                     </div>
-                    <div className={`p-3 rounded-2xl text-sm whitespace-pre-wrap leading-relaxed ${msg.sender === 'user' ? 'bg-[#051036] text-white rounded-tr-none' : 'bg-white border border-gray-200 text-[#051036] rounded-tl-none shadow-sm'}`}>
+                    <div className={`p-3 rounded-2xl text-sm whitespace-pre-wrap leading-relaxed ${msg.sender === 'user' ? 'bg-cyan-500 text-white rounded-tr-none' : 'bg-slate-800/60 border border-white/10 text-slate-200 rounded-tl-none shadow-sm backdrop-blur-sm'}`}>
                       {msg.text}
                     </div>
                   </div>
@@ -116,13 +119,13 @@ export default function FloatingAIChatbot() {
               {isTyping && (
                 <div className="flex justify-start">
                   <div className="flex gap-2 max-w-[85%] flex-row">
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-[#3554D1]/10 text-[#3554D1]">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-slate-800/80 text-cyan-300 border border-cyan-400/30">
                       <Bot className="w-4 h-4" />
                     </div>
-                    <div className="p-3 rounded-2xl bg-white border border-gray-200 text-[#051036] rounded-tl-none shadow-sm flex items-center gap-1.5">
-                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    <div className="p-3 rounded-2xl bg-slate-800/60 border border-white/10 text-slate-200 rounded-tl-none shadow-sm backdrop-blur-sm flex items-center gap-1.5">
+                      <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                      <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                     </div>
                   </div>
                 </div>
@@ -131,7 +134,7 @@ export default function FloatingAIChatbot() {
             </div>
 
             {/* Input Area */}
-            <div className="p-3 bg-white border-t border-gray-100">
+            <div className="p-4 bg-slate-900/80 border-t border-white/10 backdrop-blur-sm">
               <div className="relative flex items-center">
                 <input
                   type="text"
@@ -139,18 +142,18 @@ export default function FloatingAIChatbot() {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ask about destinations, budget..."
-                  className="w-full bg-gray-100 border-transparent rounded-full pl-4 pr-12 py-3 text-sm focus:bg-white focus:border-[#3554D1] focus:ring-1 focus:ring-[#3554D1] outline-none transition-all text-[#051036]"
+                  className="w-full bg-slate-800/60 border border-white/10 rounded-full pl-4 pr-12 py-3 text-sm focus:bg-slate-800 focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/30 outline-none transition-all text-white placeholder:text-slate-400 backdrop-blur-sm"
                 />
                 <button
                   onClick={handleSend}
                   disabled={!inputValue.trim() || isTyping}
-                  className="absolute right-1 w-10 h-10 flex items-center justify-center bg-[#3554D1] text-white rounded-full hover:bg-[#2a43b0] disabled:opacity-50 disabled:hover:bg-[#3554D1] transition-colors"
+                  className="absolute right-1 w-10 h-10 flex items-center justify-center bg-cyan-500 text-white rounded-full hover:bg-cyan-400 disabled:opacity-50 disabled:hover:bg-cyan-500 transition-colors"
                 >
                   <Send className="w-4 h-4 -ml-0.5" />
                 </button>
               </div>
               <div className="text-center mt-2">
-                <span className="text-[10px] text-gray-400">Powered by TripBooking AI</span>
+                <span className="text-[10px] text-slate-400">Powered by TripBooking AI</span>
               </div>
             </div>
           </motion.div>

@@ -29,7 +29,7 @@ export default function RecommendedFlights() {
 
   return (
     <section className="py-16 bg-white">
-      <div className="max-w-[1320px] mx-auto px-4">
+      <div className="max-w-[1440px] mx-auto px-4">
         {/* Header Area */}
         <div className="mb-6">
           <h2 className="text-2xl md:text-[28px] font-bold text-[#3554D1]">Recommended Flights</h2>

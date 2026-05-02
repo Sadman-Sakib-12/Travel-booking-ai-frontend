@@ -37,14 +37,14 @@ export default function ContactPage() {
     <div className="min-h-screen bg-white pt-16">
       {/* Header */}
       <div className="bg-[#051036] py-16">
-        <div className="max-w-[1320px] mx-auto px-4 text-center">
+        <div className="max-w-[1440px] mx-auto px-4 text-center">
           <p className="text-[#3554D1] font-bold text-sm uppercase tracking-widest mb-3">Get In Touch</p>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">Contact Us</h1>
           <p className="text-white/60 text-lg max-w-xl mx-auto">Have a question or need help? Our team is available 24/7 to assist you.</p>
         </div>
       </div>
 
-      <div className="max-w-[1320px] mx-auto px-4 py-16">
+      <div className="max-w-[1440px] mx-auto px-4 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Info */}
           <div className="space-y-8">

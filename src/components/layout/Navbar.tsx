@@ -53,7 +53,7 @@ export default function Navbar() {
 
   return (
     <nav className="w-full bg-white border-b border-gray-100 fixed top-0 left-0 z-50 shadow-sm">
-      <div className="max-w-[1320px] mx-auto px-4 h-16 flex items-center justify-between">
+      <div className="max-w-[1440px] mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center xl:gap-16 lg:gap-10">
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0">
